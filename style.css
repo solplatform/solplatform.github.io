@@ -72,23 +72,17 @@ body {
   font-size: 1.15rem;
 }
 
-.logo-mark {
+.logo-icon {
   width: 32px;
   height: 32px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: white;
+  object-fit: cover;
+  display: block;
 }
 
-.logo-mark.small {
+.logo-icon.small {
   width: 24px;
   height: 24px;
-  font-size: 0.75rem;
   border-radius: 6px;
 }
 
@@ -246,10 +240,17 @@ body {
   font-size: 0.95rem;
   color: white;
   margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.app-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .app-icon.solsips {
-  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  background: transparent;
 }
 
 .app-icon.solagent {
