@@ -18,6 +18,11 @@
   box-sizing: border-box;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background: var(--bg);
@@ -73,16 +78,24 @@ body {
 }
 
 .logo-icon {
-  width: 32px;
-  height: 32px;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px;
+  min-height: 32px;
+  max-width: 32px;
+  max-height: 32px;
   border-radius: 8px;
   object-fit: cover;
   display: block;
 }
 
 .logo-icon.small {
-  width: 24px;
-  height: 24px;
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px;
+  min-height: 24px;
+  max-width: 24px;
+  max-height: 24px;
   border-radius: 6px;
 }
 
@@ -232,6 +245,8 @@ body {
 .app-icon {
   width: 56px;
   height: 56px;
+  min-width: 56px;
+  min-height: 56px;
   border-radius: 14px;
   display: flex;
   align-items: center;
@@ -244,9 +259,12 @@ body {
 }
 
 .app-icon img {
-  width: 100%;
-  height: 100%;
+  width: 56px !important;
+  height: 56px !important;
+  max-width: 56px;
+  max-height: 56px;
   object-fit: cover;
+  display: block;
 }
 
 .app-icon.solsips {
