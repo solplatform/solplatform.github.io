@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SolPlatform — Open Source Apps</title>
-  <meta name="description" content="Скачайте SolSIP и SolAgent — открытые Android-приложения" />
+  <meta name="description" content="Download SolSIP and SolAgent — open-source Android apps" />
 
   <!-- Favicon -->
   <link rel="icon" href="assets/favicon.ico" sizes="any" />
@@ -27,10 +27,14 @@
         <span class="logo-text">SolPlatform</span>
       </div>
       <nav class="nav">
-        <a href="#apps">Приложения</a>
-        <a href="#about">О проекте</a>
-        <a href="#donate">Поддержать</a>
+        <a href="#apps" data-i18n="nav.apps">Apps</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#donate" data-i18n="nav.donate">Support</a>
         <a href="https://github.com/solplatform" target="_blank" rel="noopener">GitHub</a>
+        <div class="lang-switch">
+          <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+          <button type="button" class="lang-btn" data-lang="ru" aria-label="Русский">RU</button>
+        </div>
       </nav>
     </div>
   </header>
@@ -39,14 +43,14 @@
     <!-- Hero -->
     <section class="hero">
       <div class="container">
-        <h1>Открытые приложения<br>для реальных задач</h1>
-        <p class="hero-subtitle">
-          SolSIP и SolAgent — полностью открытый исходный код.<br>
-          Скачивайте APK напрямую с GitHub.
+        <h1 data-i18n-html="hero.title">Open-source apps<br>for real tasks</h1>
+        <p class="hero-subtitle" data-i18n-html="hero.subtitle">
+          SolSIP and SolAgent — fully open source.<br>
+          Download APKs directly from GitHub.
         </p>
         <div class="hero-actions">
-          <a href="#apps" class="btn btn-primary">Скачать приложения</a>
-          <a href="#donate" class="btn btn-ghost">Поддержать проект</a>
+          <a href="#apps" class="btn btn-primary" data-i18n="hero.download">Download apps</a>
+          <a href="#donate" class="btn btn-ghost" data-i18n="hero.support">Support the project</a>
         </div>
       </div>
     </section>
@@ -54,8 +58,8 @@
     <!-- Apps -->
     <section id="apps" class="apps">
       <div class="container">
-        <h2 class="section-title">Приложения</h2>
-        <p class="section-subtitle">Два независимых проекта с открытым кодом</p>
+        <h2 class="section-title" data-i18n="apps.title">Apps</h2>
+        <p class="section-subtitle" data-i18n="apps.subtitle">Two independent open-source projects</p>
 
         <div class="apps-grid">
           <!-- SolSIP -->
@@ -66,24 +70,26 @@
             <div class="app-info">
               <h3>SolSIP</h3>
               <span class="badge">Kotlin</span>
-              <p>VoIP и видео softphone на базе SIP-протокола. Чистый и лёгкий клиент.</p>
+              <p data-i18n="apps.solsips.desc">VoIP and video softphone based on the SIP protocol. Clean and lightweight client.</p>
               <ul class="features">
-                <li>Открытый исходный код</li>
-                <li>Написано на Kotlin</li>
-                <li>Прямая загрузка APK</li>
+                <li data-i18n="apps.feature.opensource">Open source</li>
+                <li data-i18n="apps.solsips.lang">Written in Kotlin</li>
+                <li data-i18n="apps.feature.apk">Direct APK download</li>
               </ul>
             </div>
             <div class="app-actions">
               <a href="https://github.com/solplatform/solsips-android/releases/latest"
                  class="btn btn-download"
                  id="download-solsips"
-                 target="_blank" rel="noopener">
-                Скачать APK
+                 target="_blank" rel="noopener"
+                 data-i18n="apps.download">
+                Download APK
               </a>
               <a href="https://github.com/solplatform/solsips-android"
                  class="btn btn-outline"
-                 target="_blank" rel="noopener">
-                Исходники
+                 target="_blank" rel="noopener"
+                 data-i18n="apps.source">
+                Source code
               </a>
             </div>
           </article>
@@ -96,24 +102,26 @@
             <div class="app-info">
               <h3>SolAgent</h3>
               <span class="badge">Flutter</span>
-              <p>Умный агент с RAG-сервером. Автоматически поднимает Flexisip-сервер для работы с приложением SolSIP.</p>
+              <p data-i18n="apps.solagent.desc">Smart agent with a RAG server. Automatically deploys a Flexisip server for the SolSIP app.</p>
               <ul class="features">
-                <li>Открытый исходный код</li>
-                <li>Написано на Flutter</li>
-                <li>Прямая загрузка APK</li>
+                <li data-i18n="apps.feature.opensource">Open source</li>
+                <li data-i18n="apps.solagent.lang">Written in Flutter</li>
+                <li data-i18n="apps.feature.apk">Direct APK download</li>
               </ul>
             </div>
             <div class="app-actions">
               <a href="https://github.com/solplatform/solagent/releases/latest"
                  class="btn btn-download"
                  id="download-solagent"
-                 target="_blank" rel="noopener">
-                Скачать APK
+                 target="_blank" rel="noopener"
+                 data-i18n="apps.download">
+                Download APK
               </a>
               <a href="https://github.com/solplatform/solagent"
                  class="btn btn-outline"
-                 target="_blank" rel="noopener">
-                Исходники
+                 target="_blank" rel="noopener"
+                 data-i18n="apps.source">
+                Source code
               </a>
             </div>
           </article>
@@ -124,22 +132,22 @@
     <!-- About -->
     <section id="about" class="about">
       <div class="container">
-        <h2 class="section-title">Почему с GitHub?</h2>
+        <h2 class="section-title" data-i18n="about.title">Why GitHub?</h2>
         <div class="about-grid">
           <div class="about-item">
             <div class="about-num">01</div>
-            <h4>Полностью открыто</h4>
-            <p>Вы видите весь код. Никаких скрытых трекеров и чёрных ящиков.</p>
+            <h4 data-i18n="about.1.title">Fully open</h4>
+            <p data-i18n="about.1.desc">You can see all the code. No hidden trackers or black boxes.</p>
           </div>
           <div class="about-item">
             <div class="about-num">02</div>
-            <h4>Прямые обновления</h4>
-            <p>Если установили с GitHub — приложение само предложит обновиться отсюда.</p>
+            <h4 data-i18n="about.2.title">Direct updates</h4>
+            <p data-i18n="about.2.desc">If installed from GitHub, the app will offer updates from here.</p>
           </div>
           <div class="about-item">
             <div class="about-num">03</div>
-            <h4>Без магазинов</h4>
-            <p>Не зависим от Google Play и RuStore. Вы получаете приложение напрямую.</p>
+            <h4 data-i18n="about.3.title">No stores required</h4>
+            <p data-i18n="about.3.desc">Independent of Google Play and RuStore. Get the app directly.</p>
           </div>
         </div>
       </div>
@@ -148,38 +156,40 @@
     <!-- Donate -->
     <section id="donate" class="donate">
       <div class="container">
-        <h2 class="section-title">Поддержать проект</h2>
-        <p class="section-subtitle">
-          Добровольное пожертвование на развитие SolSIP и SolAgent.<br>
-          Спасибо за любую поддержку!
+        <h2 class="section-title" data-i18n="donate.title">Support the project</h2>
+        <p class="section-subtitle" data-i18n-html="donate.subtitle">
+          Voluntary donation for the development of SolSIP and SolAgent.<br>
+          Thank you for any support!
         </p>
 
         <div class="donate-grid">
           <!-- SBP QR -->
           <div class="donate-card">
-            <h3>СБП (Альфа-Банк)</h3>
-            <p class="donate-desc">Отсканируйте QR-код в приложении любого банка</p>
+            <h3 data-i18n="donate.sbp.title">SBP (Alfa-Bank)</h3>
+            <p class="donate-desc" data-i18n="donate.sbp.desc">Scan the QR code in any banking app</p>
             <div class="qr-wrap">
-              <img src="assets/sbp-qr.png" alt="QR-код СБП" class="qr-code" />
+              <img src="assets/sbp-qr.png" alt="SBP QR code" class="qr-code" />
             </div>
             <a href="https://c2c.cbrpay.ru/BS1I006QM3K8L1C08U682E74VQUFI0H8"
                class="btn btn-download"
-               target="_blank" rel="noopener">
-              Открыть ссылку СБП
+               target="_blank" rel="noopener"
+               data-i18n="donate.sbp.btn">
+              Open SBP link
             </a>
           </div>
 
           <!-- DonationAlerts -->
           <div class="donate-card">
             <h3>DonationAlerts</h3>
-            <p class="donate-desc">Карты, ЮMoney и другие способы</p>
+            <p class="donate-desc" data-i18n="donate.da.desc">Cards, YuMoney and other methods</p>
             <div class="donate-icon-wrap">
               <span class="donate-emoji">💝</span>
             </div>
             <a href="https://www.donationalerts.com/r/solptatform"
                class="btn btn-download"
-               target="_blank" rel="noopener">
-              Поддержать через DA
+               target="_blank" rel="noopener"
+               data-i18n="donate.da.btn">
+              Support via DA
             </a>
           </div>
         </div>

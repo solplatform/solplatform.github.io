@@ -484,3 +484,44 @@ body {
 .donate-card .btn {
   width: 100%;
 }
+
+/* Language switcher */
+.lang-switch {
+  display: flex;
+  gap: 4px;
+  margin-left: 8px;
+  padding-left: 16px;
+  border-left: 1px solid var(--border);
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lang-btn:hover {
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.lang-btn.active {
+  color: var(--text);
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+@media (max-width: 640px) {
+  .lang-switch {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+  }
+}
