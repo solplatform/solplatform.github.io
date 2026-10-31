@@ -118,7 +118,13 @@ function setLanguage(lang) {
     metaDesc.setAttribute('content', t['meta.description']);
   }
 
-  // 5. Active state on language buttons
+  // 5. Show/hide language-specific blocks (e.g. SBP QR only for Russian)
+  document.querySelectorAll('[data-lang-only]').forEach(el => {
+    const only = el.getAttribute('data-lang-only');
+    el.hidden = only !== lang;
+  });
+
+  // 6. Active state on language buttons
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
   });
