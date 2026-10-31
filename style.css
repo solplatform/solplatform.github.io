@@ -525,3 +525,8 @@ body {
     border-left: none;
   }
 }
+
+
+.lang-hidden {
+  display: none !important;
+}

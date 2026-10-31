@@ -121,7 +121,7 @@ function setLanguage(lang) {
   // 5. Show/hide language-specific blocks (e.g. SBP QR only for Russian)
   document.querySelectorAll('[data-lang-only]').forEach(el => {
     const only = el.getAttribute('data-lang-only');
-    el.hidden = only !== lang;
+    el.classList.toggle('lang-hidden', only !== lang);
   });
 
   // 6. Active state on language buttons
