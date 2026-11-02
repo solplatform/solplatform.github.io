@@ -7,7 +7,6 @@
       "id": "sam-default-donate",
       "valid_until": "2099-12-31T23:59:59Z",
       "link_url": "https://solplatform.github.io/#donate",
-      "price_per_day_rub": 150.0,
       "themes": {
         "light": {
           "portrait_img": "https://solplatform.github.io/assets/promo/ru-sam-light-portrait.webp",
