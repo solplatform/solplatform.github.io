@@ -1,0 +1,26 @@
+{
+  "level": "city",
+  "country_code": "RU",
+  "region_code": "SAM",
+  "city": "Tolyatti",
+  "link_url": "https://solplatform.github.io/#donate",
+  "price_per_day_rub": 50.0,
+  "themes": {
+    "light": {
+      "portrait_img": "https://solplatform.github.io/assets/promo/ru-sam-tolyatti-light-portrait.webp",
+      "portrait_sha256": "REPLACE_WITH_SHA256",
+      "landscape_img": "https://solplatform.github.io/assets/promo/ru-sam-tolyatti-light-landscape.webp",
+      "landscape_sha256": "REPLACE_WITH_SHA256",
+      "alpha": 0.45,
+      "brightness": 0.05
+    },
+    "dark": {
+      "portrait_img": "https://solplatform.github.io/assets/promo/ru-sam-tolyatti-dark-portrait.webp",
+      "portrait_sha256": "REPLACE_WITH_SHA256",
+      "landscape_img": "https://solplatform.github.io/assets/promo/ru-sam-tolyatti-dark-landscape.webp",
+      "landscape_sha256": "REPLACE_WITH_SHA256",
+      "alpha": 0.25,
+      "brightness": -0.20
+    }
+  }
+}

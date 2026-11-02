@@ -29,6 +29,7 @@
       <nav class="nav">
         <a href="#apps" data-i18n="nav.apps">Apps</a>
         <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#stats" data-i18n="nav.stats">Stats</a>
         <a href="#donate" data-i18n="nav.donate">Support</a>
         <a href="https://github.com/solplatform" target="_blank" rel="noopener">GitHub</a>
         <div class="lang-switch">
@@ -150,6 +151,30 @@
             <p data-i18n="about.3.desc">Independent of Google Play and RuStore. Get the app directly.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+
+    <!-- Stats -->
+    <section id="stats" class="stats">
+      <div class="container">
+        <h2 class="section-title" data-i18n="stats.title">Stats</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="download-count">—</div>
+            <div class="stat-label" data-i18n="stats.downloads">APK downloads</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="promo-count">—</div>
+            <div class="stat-label" data-i18n="stats.promo">Ad impressions</div>
+          </div>
+        </div>
+        <!--
+          Moderator: generate image hashes for promo.json
+          Linux:  sha256sum assets/promo/your-image.webp
+          Put the hex digest into portrait_sha256 / landscape_sha256 fields.
+          App cascade: /promo/{CC}/{REG}/{City}.json → /promo/{CC}/{REG}.json → /promo/{CC}.json → /promo/WORLD.json
+        -->
       </div>
     </section>
 
