@@ -3,25 +3,25 @@
   "country_code": "RU",
   "items": [
     {
-      "id": "ru-default-donate",
-      "valid_until": "2099-12-31T23:59:59Z",
-      "link_url": "https://solplatform.github.io/#donate",
+      "id": "ru-clipmaster-memorial-bot-test",
+      "valid_until": "2026-12-31T23:59:59Z",
+      "link_url": "https://t.me/ClipMaster24Bot",
       "themes": {
         "light": {
-          "portrait_img": "https://solplatform.github.io/assets/promo/ru-light-portrait.webp",
-          "portrait_sha256": "REPLACE_WITH_SHA256",
-          "landscape_img": "https://solplatform.github.io/assets/promo/ru-light-landscape.webp",
-          "landscape_sha256": "REPLACE_WITH_SHA256",
-          "alpha": 0.4,
+          "portrait_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-light-portrait.jpg",
+          "portrait_sha256": "73e0509e4e2cd255ee5ed917c8c7548595755cf2e8566d6fcc16e2761db46b94",
+          "landscape_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-light-landscape.jpg",
+          "landscape_sha256": "b7c4027e0138c92494cf4d0cdf122e2d4e4ec3b9b9fcdaa7561eb206a91b99ee",
+          "alpha": 0.42,
           "brightness": 0.0
         },
         "dark": {
-          "portrait_img": "https://solplatform.github.io/assets/promo/ru-dark-portrait.webp",
-          "portrait_sha256": "REPLACE_WITH_SHA256",
-          "landscape_img": "https://solplatform.github.io/assets/promo/ru-dark-landscape.webp",
-          "landscape_sha256": "REPLACE_WITH_SHA256",
-          "alpha": 0.2,
-          "brightness": -0.15
+          "portrait_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-dark-portrait.jpg",
+          "portrait_sha256": "ae8d2612787d0f69fa378273d853ea61a89cec69eabaeda11537c675eb41b5ce",
+          "landscape_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-dark-landscape.jpg",
+          "landscape_sha256": "9dda35e7c13a0da381f1ae268ac578594318b8285d74986a77eeebcb6626bb11",
+          "alpha": 0.28,
+          "brightness": -0.12
         }
       }
     }
