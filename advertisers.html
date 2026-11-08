@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Для рекламодателей — SolPlatform</title>
+  <meta name="description" content="Калькулятор хэшей промо-изображений, стратегия и статистика рекламной кампании" />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <img src="assets/icon.png" alt="SolPlatform" class="logo-icon" />
+        <span class="logo-text">SolPlatform</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="#hash-calc">Калькулятор хэшей</a>
+        <a href="#strategy">Стратегия</a>
+        <a href="#architecture">Архитектура</a>
+        <a href="#stats-section">Статистика</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <h1>Для рекламодателей</h1>
+        <p class="hero-subtitle">
+          Инструменты для управления рекламными кампаниями<br>
+          в приложениях SolSIP и SolAgent
+        </p>
+      </div>
+    </section>
+
+    <!-- Hash Calculator -->
+    <section id="hash-calc" class="about">
+      <div class="container">
+        <h2 class="section-title">Калькулятор хэшей промо-изображений</h2>
+        <p class="section-subtitle">
+          Введите URL промо-изображения — получите SHA256 хэш для promo.json<br>
+          Приложение сверяет хэш локального изображения с хэшем в promo.json.<br>
+          Если хэши совпадают — показывает кэшированное изображение.<br>
+          Если не совпадает — скачивает новое изображение.
+        </p>
+
+        <div class="hash-calc">
+          <div class="hash-input-group">
+            <label for="image-url">URL изображения</label>
+            <input type="url" id="image-url" placeholder="https://solplatform.github.io/assets/promo/clipmaster/ru-light-portrait.jpg" />
+          </div>
+
+          <button type="button" id="calc-hash-btn" class="btn btn-primary">Рассчитать хэш</button>
+
+          <div class="hash-result" id="hash-result" style="display:none;">
+            <div class="hash-result-item">
+              <span class="hash-label">SHA256:</span>
+              <code id="hash-value" class="hash-code"></code>
+              <button type="button" id="copy-hash-btn" class="btn btn-outline btn-sm">Копировать</button>
+            </div>
+          </div>
+
+          <div class="hash-info">
+            <h4>Как использовать:</h4>
+            <ol>
+              <li>Загрузите новое изображение на сервер</li>
+              <li>Скопируйте URL изображения</li>
+              <li>Вставьте URL в поле выше и нажмите "Рассчитать хэш"</li>
+              <li>Скопируйте SHA256 хэш</li>
+              <li>Вставьте хэш в поле <code>portrait_sha256</code> или <code>landscape_sha256</code> в promo.json</li>
+              <li>Запуште изменения в репозиторий</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strategy -->
+    <section id="strategy" class="about">
+      <div class="container">
+        <h2 class="section-title">Стратегия рекламной кампании</h2>
+        <div class="about-grid">
+          <div class="about-item">
+            <div class="about-num">01</div>
+            <h4>Гео-таргетинг</h4>
+            <p>Реклама показывается в зависимости от региона, страны и города пользователя. Каскадная система: /promo/{CC}/{REG}/{City}.json → /promo/{CC}/{REG}.json → /promo/{CC}.json → /promo/WORLD.json</p>
+          </div>
+          <div class="about-item">
+            <div class="about-num">02</div>
+            <h4>Тематическое таргетирование</h4>
+            <p>Разные изображения для светлой и тёмной темы. Разные изображения для портретной и ландшафтной ориентации экрана.</p>
+          </div>
+          <div class="about-item">
+            <div class="about-num">03</div>
+            <h4>Контроль показа</h4>
+            <p>Рекламодатель задаёт дату окончания показа (valid_until). Пользователь может скрыть рекламу на 24 часа. Настройки отображения кнопки рекламы (размер, позиция, текст) доступны в настройках.</p>
+          </div>
+          <div class="about-item">
+            <div class="about-num">04</div>
+            <h4>Кэш и обновление</h4>
+            <p>Приложение кэширует изображения локально. При изменении хэша в promo.json — скачивает новое изображение. Это снижает трафик и ускоряет загрузку.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture -->
+    <section id="architecture" class="about">
+      <div class="container">
+        <h2 class="section-title">Архитектура рекламной системы</h2>
+        <div class="about-grid">
+          <div class="about-item">
+            <div class="about-num">01</div>
+            <h4>PromoBannerView</h4>
+            <p>Загружает promo.json для текущей геолокации, выбирает изображение по теме и ориентации, кэширует в ImageView с помощью Coil3. Cache-busting по SHA256 хэшу.</p>
+          </div>
+          <div class="about-item">
+            <div class="about-num">02</div>
+            <h4>PromoFragment</h4>
+            <p>Настройки отображения рекламы: alpha, цвет канваса, размер и позиция кнопки эмодзи. Сохраняет настройки в SharedPreferences (promo_prefs).</p>
+          </div>
+          <div class="about-item">
+            <div class="about-num">03</div>
+            <h4>AdBannerDialog</h4>
+            <p>Показывает рекламный баннер при нажатии на кнопку эмодзи. Содержит изображение, описание и ссылку. Пользователь может перейти по ссылке или скрыть рекламу на 24 часа.</p>
+          </div>
+          <div class="about-item">
+            <div class="about-num">04</div>
+            <h4>PromoViewModel</h4>
+            <p>Управляет состоянием настроек рекламы. LiveData для emoji-текста, размера, позиции, зеркала. Сохраняет настройки в SharedPreferences.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section id="stats-section" class="stats">
+      <div class="container">
+        <h2 class="section-title">Статистика загрузок</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="ad-impressions">—</div>
+            <div class="stat-label">Показов рекламы</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="ad-clicks">—</div>
+            <div class="stat-label">Кликов по рекламе</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="ad-countries">—</div>
+            <div class="stat-label">Стран</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="ad-regions">—</div>
+            <div class="stat-label">Регионов</div>
+          </div>
+        </div>
+
+        <div class="hash-info" style="margin-top: 24px;">
+          <h4>Как работает счётчик:</h4>
+          <p>
+            Приложение отправляет анонимные метрики на бесплатный счётчик (Counter.dev).<br>
+            Данные включают: страну, регион, город, тему (light/dark), ориентацию экрана.<br>
+            Никаких персональных данных не собирается.
+          </p>
+          <a href="https://counter.dev/stats/7Y5B" target="_blank" rel="noopener" class="btn btn-outline">
+            Открыть Counter.dev
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-left">
+        <img src="assets/icon.png" alt="SolPlatform" class="logo-icon small" />
+        <span>SolPlatform</span>
+      </div>
+      <div class="footer-right">
+        <a href="index.html">Главная</a>
+        <span class="separator">·</span>
+        <a href="https://github.com/solplatform" target="_blank" rel="noopener">GitHub</a>
+        <span class="separator">·</span>
+        <span>Open Source</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Hash calculator
+    document.getElementById('calc-hash-btn').addEventListener('click', async () => {
+      const url = document.getElementById('image-url').value.trim();
+      if (!url) {
+        alert('Введите URL изображения');
+        return;
+      }
+
+      const btn = document.getElementById('calc-hash-btn');
+      btn.textContent = 'Загрузка...';
+      btn.disabled = true;
+
+      try {
+        const response = await fetch(url, { mode: 'cors' });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        const arrayBuffer = await response.arrayBuffer();
+        const hashBuffer = await crypto.subtle.digest('SHA-256', arrayBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+        document.getElementById('hash-value').textContent = hashHex;
+        document.getElementById('hash-result').style.display = 'block';
+      } catch (error) {
+        alert('Ошибка при загрузке изображения: ' + error.message + '\n\nУбедитесь, что сервер разрешает CORS.');
+      } finally {
+        btn.textContent = 'Рассчитать хэш';
+        btn.disabled = false;
+      }
+    });
+
+    // Copy hash
+    document.getElementById('copy-hash-btn').addEventListener('click', () => {
+      const hash = document.getElementById('hash-value').textContent;
+      navigator.clipboard.writeText(hash).then(() => {
+        const btn = document.getElementById('copy-hash-btn');
+        btn.textContent = 'Скопировано!';
+        setTimeout(() => btn.textContent = 'Копировать', 2000);
+      });
+    });
+  </script>
+</body>
+</html>

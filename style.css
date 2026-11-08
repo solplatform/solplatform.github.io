@@ -530,3 +530,143 @@ body {
 .lang-hidden {
   display: none !important;
 }
+
+/* Advertisers page */
+.hash-calc {
+  max-width: 700px;
+  margin: 48px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hash-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hash-input-group label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.hash-input-group input {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.hash-input-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.hash-result {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.hash-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hash-label {
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.hash-code {
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 0.85rem;
+  color: #22c55e;
+  word-break: break-all;
+  flex: 1;
+  min-width: 200px;
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+.hash-info {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.hash-info h4 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.hash-info p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+}
+
+.hash-info ol {
+  padding-left: 24px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.hash-info ol li {
+  padding: 4px 0;
+}
+
+.hash-info code {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.hash-info .btn {
+  display: inline-block;
+  width: auto;
+}
+
+/* Stats page */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
