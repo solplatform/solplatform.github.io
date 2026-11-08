@@ -2,7 +2,12 @@ const translations = {
   en: {
     'nav.apps': 'Apps',
     'nav.about': 'About',
+    'nav.stats': 'Stats',
     'nav.donate': 'Support',
+    'nav.home': 'Home',
+    'nav.hash-calc': 'Hash Calculator',
+    'nav.strategy': 'Strategy',
+    'nav.architecture': 'Architecture',
     'hero.title': 'Open-source apps<br>for real tasks',
     'hero.subtitle': 'SolSIP and SolAgent — fully open source.<br>Download APKs directly from GitHub.',
     'hero.download': 'Download apps',
@@ -32,12 +37,54 @@ const translations = {
     'donate.da.desc': 'Cards, YuMoney and other methods',
     'donate.da.btn': 'Support via DA',
     'meta.title': 'SolPlatform — Open Source Apps',
-    'meta.description': 'Download SolSIP and SolAgent — open-source Android apps'
+    'meta.description': 'Download SolSIP and SolAgent — open-source Android apps',
+    'advertisers.title': 'For Advertisers',
+    'advertisers.subtitle': 'Tools for managing advertising campaigns<br>in SolSIP and SolAgent apps',
+    'hash-calc.title': 'Promo Image Hash Calculator',
+    'hash-calc.desc': 'Enter the promo image URL — get SHA256 hash for promo.json<br>The app compares the hash of the local image with the hash in promo.json.<br>If the hashes match — it shows the cached image.<br>If they don\'t match — it downloads a new image.',
+    'hash-calc.label': 'Image URL',
+    'hash-calc.calc': 'Calculate Hash',
+    'hash-calc.sha256': 'SHA256:',
+    'hash-calc.copy': 'Copy',
+    'hash-calc.how-to-use': 'How to use:',
+    'hash-calc.step1': 'Upload a new image to the server',
+    'hash-calc.step2': 'Copy the image URL',
+    'hash-calc.step3': 'Paste the URL in the field above and click "Calculate Hash"',
+    'hash-calc.step4': 'Copy the SHA256 hash',
+    'hash-calc.step5': 'Paste the hash into the <code>portrait_sha256</code> or <code>landscape_sha256</code> field in promo.json',
+    'hash-calc.step6': 'Push changes to the repository',
+    'strategy.title': 'Advertising Campaign Strategy',
+    'strategy.geo.title': 'Geo-targeting',
+    'strategy.geo.desc': 'Ads are shown depending on the user\'s region, country, and city. Cascade system: /promo/{CC}/{REG}/{City}.json → /promo/{CC}/{REG}.json → /promo/{CC}.json → /promo/WORLD.json',
+    'strategy.theme.title': 'Thematic targeting',
+    'strategy.theme.desc': 'Different images for light and dark themes. Different images for portrait and landscape screen orientations.',
+    'strategy.control.title': 'Show control',
+    'strategy.control.desc': 'The advertiser sets the end date of the show (valid_until). The user can hide the ad for 24 hours. Ad button display settings (size, position, text) are available in settings.',
+    'strategy.cache.title': 'Cache and update',
+    'strategy.cache.desc': 'The app caches images locally. When the hash changes in promo.json — it downloads a new image. This reduces traffic and speeds up loading.',
+    'architecture.title': 'Advertising System Architecture',
+    'architecture.banner.desc': 'Loads promo.json for the current geolocation, selects an image by theme and orientation, caches in ImageView using Coil3. Cache-busting by SHA256 hash.',
+    'architecture.fragment.desc': 'Ad display settings: alpha, canvas color, emoji button size and position. Saves settings to SharedPreferences (promo_prefs).',
+    'architecture.dialog.desc': 'Shows an ad banner when clicking the emoji button. Contains an image, description, and link. The user can follow the link or hide the ad for 24 hours.',
+    'architecture.viewmodel.desc': 'Manages ad settings state. LiveData for emoji text, size, position, mirror. Saves settings to SharedPreferences.',
+    'stats.title': 'Download Statistics',
+    'stats.impressions': 'Ad impressions',
+    'stats.clicks': 'Ad clicks',
+    'stats.countries': 'Countries',
+    'stats.regions': 'Regions',
+    'stats.how-it-works': 'How the counter works:',
+    'stats.how-it-works.desc': 'The app sends anonymous metrics to a free counter (Counter.dev).<br>Data includes: country, region, city, theme (light/dark), screen orientation.<br>No personal data is collected.',
+    'stats.counter.dev': 'Open Counter.dev'
   },
   ru: {
     'nav.apps': 'Приложения',
     'nav.about': 'О проекте',
+    'nav.stats': 'Статистика',
     'nav.donate': 'Поддержать',
+    'nav.home': 'Главная',
+    'nav.hash-calc': 'Калькулятор хэшей',
+    'nav.strategy': 'Стратегия',
+    'nav.architecture': 'Архитектура',
     'hero.title': 'Открытые приложения<br>для реальных задач',
     'hero.subtitle': 'SolSIP и SolAgent — полностью открытый исходный код.<br>Скачивайте APK напрямую с GitHub.',
     'hero.download': 'Скачать приложения',
@@ -67,7 +114,44 @@ const translations = {
     'donate.da.desc': 'Карты, ЮMoney и другие способы',
     'donate.da.btn': 'Поддержать через DA',
     'meta.title': 'SolPlatform — Open Source Apps',
-    'meta.description': 'Скачайте SolSIP и SolAgent — открытые Android-приложения'
+    'meta.description': 'Скачайте SolSIP и SolAgent — открытые Android-приложения',
+    'advertisers.title': 'Для рекламодателей',
+    'advertisers.subtitle': 'Инструменты для управления рекламными кампаниями<br>в приложениях SolSIP и SolAgent',
+    'hash-calc.title': 'Калькулятор хэшей промо-изображений',
+    'hash-calc.desc': 'Введите URL промо-изображения — получите SHA256 хэш для promo.json<br>Приложение сверяет хэш локального изображения с хэшем в promo.json.<br>Если хэши совпадают — показывает кэшированное изображение.<br>Если не совпадает — скачивает новое изображение.',
+    'hash-calc.label': 'URL изображения',
+    'hash-calc.calc': 'Рассчитать хэш',
+    'hash-calc.sha256': 'SHA256:',
+    'hash-calc.copy': 'Копировать',
+    'hash-calc.how-to-use': 'Как использовать:',
+    'hash-calc.step1': 'Загрузите новое изображение на сервер',
+    'hash-calc.step2': 'Скопируйте URL изображения',
+    'hash-calc.step3': 'Вставьте URL в поле выше и нажмите "Рассчитать хэш"',
+    'hash-calc.step4': 'Скопируйте SHA256 хэш',
+    'hash-calc.step5': 'Вставьте хэш в поле <code>portrait_sha256</code> или <code>landscape_sha256</code> в promo.json',
+    'hash-calc.step6': 'Запуште изменения в репозиторий',
+    'strategy.title': 'Стратегия рекламной кампании',
+    'strategy.geo.title': 'Гео-таргетинг',
+    'strategy.geo.desc': 'Реклама показывается в зависимости от региона, страны и города пользователя. Каскадная система: /promo/{CC}/{REG}/{City}.json → /promo/{CC}/{REG}.json → /promo/{CC}.json → /promo/WORLD.json',
+    'strategy.theme.title': 'Тематическое таргетирование',
+    'strategy.theme.desc': 'Разные изображения для светлой и тёмной темы. Разные изображения для портретной и ландшафтной ориентации экрана.',
+    'strategy.control.title': 'Контроль показа',
+    'strategy.control.desc': 'Рекламодатель задаёт дату окончания показа (valid_until). Пользователь может скрыть рекламу на 24 часа. Настройки отображения кнопки рекламы (размер, позиция, текст) доступны в настройках.',
+    'strategy.cache.title': 'Кэш и обновление',
+    'strategy.cache.desc': 'Приложение кэширует изображения локально. При изменении хэша в promo.json — скачивает новое изображение. Это снижает трафик и ускоряет загрузку.',
+    'architecture.title': 'Архитектура рекламной системы',
+    'architecture.banner.desc': 'Загружает promo.json для текущей геолокации, выбирает изображение по теме и ориентации, кэширует в ImageView с помощью Coil3. Cache-busting по SHA256 хэшу.',
+    'architecture.fragment.desc': 'Настройки отображения рекламы: alpha, цвет канваса, размер и позиция кнопки эмодзи. Сохраняет настройки в SharedPreferences (promo_prefs).',
+    'architecture.dialog.desc': 'Показывает рекламный баннер при нажатии на кнопку эмодзи. Содержит изображение, описание и ссылку. Пользователь может перейти по ссылке или скрыть рекламу на 24 часа.',
+    'architecture.viewmodel.desc': 'Управляет состоянием настроек рекламы. LiveData для emoji-текста, размера, позиции, зеркала. Сохраняет настройки в SharedPreferences.',
+    'stats.title': 'Статистика загрузок',
+    'stats.impressions': 'Показов рекламы',
+    'stats.clicks': 'Кликов по рекламе',
+    'stats.countries': 'Стран',
+    'stats.regions': 'Регионов',
+    'stats.how-it-works': 'Как работает счётчик:',
+    'stats.how-it-works.desc': 'Приложение отправляет анонимные метрики на бесплатный счётчик (Counter.dev).<br>Данные включают: страну, регион, город, тему (light/dark), ориентацию экрана.<br>Никаких персональных данных не собирается.',
+    'stats.counter.dev': 'Открыть Counter.dev'
   }
 };
 
@@ -131,9 +215,16 @@ function setLanguage(lang) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const lang = getInitialLanguage();
+  // On advertisers.html, default to Russian
+  let lang = getInitialLanguage();
+  if (document.querySelector('.lang-switch')) {
+    // This is advertisers.html (has language switcher)
+    lang = 'ru';
+  }
+  
   setLanguage(lang);
 
+  // Handle language buttons (works on both index.html and advertisers.html)
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       setLanguage(btn.getAttribute('data-lang'));
