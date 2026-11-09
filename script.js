@@ -5,6 +5,7 @@ const translations = {
     'nav.stats': 'Stats',
     'nav.donate': 'Support',
     'nav.home': 'Home',
+    'nav.advertisers': 'For Advertisers',
     'nav.hash-calc': 'Hash Calculator',
     'nav.strategy': 'Strategy',
     'nav.architecture': 'Architecture',
@@ -38,6 +39,7 @@ const translations = {
     'donate.da.btn': 'Support via DA',
     'meta.title': 'SolPlatform — Open Source Apps',
     'meta.description': 'Download SolSIP and SolAgent — open-source Android apps',
+    'nav.github': 'GitHub',
     'advertisers.title': 'For Advertisers',
     'advertisers.subtitle': 'Tools for managing advertising campaigns<br>in SolSIP and SolAgent apps',
     'hash-calc.title': 'Promo Image Hash Calculator',
@@ -67,14 +69,18 @@ const translations = {
     'architecture.fragment.desc': 'Ad display settings: alpha, canvas color, emoji button size and position. Saves settings to SharedPreferences (promo_prefs).',
     'architecture.dialog.desc': 'Shows an ad banner when clicking the emoji button. Contains an image, description, and link. The user can follow the link or hide the ad for 24 hours.',
     'architecture.viewmodel.desc': 'Manages ad settings state. LiveData for emoji text, size, position, mirror. Saves settings to SharedPreferences.',
-    'stats.title': 'Download Statistics',
+    'stats.title': 'Stats',
+    'stats.title-advertisers': 'Download Statistics',
+    'stats.downloads': 'APK downloads',
+    'stats.promo': 'Ad impressions',
     'stats.impressions': 'Ad impressions',
     'stats.clicks': 'Ad clicks',
     'stats.countries': 'Countries',
     'stats.regions': 'Regions',
     'stats.how-it-works': 'How the counter works:',
     'stats.how-it-works.desc': 'The app sends anonymous metrics to a free counter (Counter.dev).<br>Data includes: country, region, city, theme (light/dark), screen orientation.<br>No personal data is collected.',
-    'stats.counter.dev': 'Open Counter.dev'
+    'stats.counter.dev': 'Open Counter.dev',
+    'footer.opensource': 'Open Source'
   },
   ru: {
     'nav.apps': 'Приложения',
@@ -82,6 +88,7 @@ const translations = {
     'nav.stats': 'Статистика',
     'nav.donate': 'Поддержать',
     'nav.home': 'Главная',
+    'nav.advertisers': 'Рекламодателям',
     'nav.hash-calc': 'Калькулятор хэшей',
     'nav.strategy': 'Стратегия',
     'nav.architecture': 'Архитектура',
@@ -115,6 +122,7 @@ const translations = {
     'donate.da.btn': 'Поддержать через DA',
     'meta.title': 'SolPlatform — Open Source Apps',
     'meta.description': 'Скачайте SolSIP и SolAgent — открытые Android-приложения',
+    'nav.github': 'GitHub',
     'advertisers.title': 'Для рекламодателей',
     'advertisers.subtitle': 'Инструменты для управления рекламными кампаниями<br>в приложениях SolSIP и SolAgent',
     'hash-calc.title': 'Калькулятор хэшей промо-изображений',
@@ -144,16 +152,65 @@ const translations = {
     'architecture.fragment.desc': 'Настройки отображения рекламы: alpha, цвет канваса, размер и позиция кнопки эмодзи. Сохраняет настройки в SharedPreferences (promo_prefs).',
     'architecture.dialog.desc': 'Показывает рекламный баннер при нажатии на кнопку эмодзи. Содержит изображение, описание и ссылку. Пользователь может перейти по ссылке или скрыть рекламу на 24 часа.',
     'architecture.viewmodel.desc': 'Управляет состоянием настроек рекламы. LiveData для emoji-текста, размера, позиции, зеркала. Сохраняет настройки в SharedPreferences.',
-    'stats.title': 'Статистика загрузок',
+    'stats.title': 'Статистика',
+    'stats.title-advertisers': 'Статистика загрузок',
+    'stats.downloads': 'Загрузок APK',
+    'stats.promo': 'Показов рекламы',
     'stats.impressions': 'Показов рекламы',
     'stats.clicks': 'Кликов по рекламе',
     'stats.countries': 'Стран',
     'stats.regions': 'Регионов',
     'stats.how-it-works': 'Как работает счётчик:',
     'stats.how-it-works.desc': 'Приложение отправляет анонимные метрики на бесплатный счётчик (Counter.dev).<br>Данные включают: страну, регион, город, тему (light/dark), ориентацию экрана.<br>Никаких персональных данных не собирается.',
-    'stats.counter.dev': 'Открыть Counter.dev'
+    'stats.counter.dev': 'Открыть Counter.dev',
+    'footer.opensource': 'Open Source'
   }
 };
+
+// Navigation config per page
+const navConfig = {
+  home: [
+    { key: 'nav.apps', href: '#apps' },
+    { key: 'nav.about', href: '#about' },
+    { key: 'nav.stats', href: '#stats' },
+    { key: 'nav.donate', href: '#donate' },
+    { key: 'nav.advertisers', href: 'advertisers.html' },
+    { key: 'nav.github', href: 'https://github.com/solplatform', external: true }
+  ],
+  advertisers: [
+    { key: 'nav.home', href: 'index.html' },
+    { key: 'nav.hash-calc', href: '#hash-calc' },
+    { key: 'nav.strategy', href: '#strategy' },
+    { key: 'nav.architecture', href: '#architecture' },
+    { key: 'nav.stats', href: '#stats-section' }
+  ]
+};
+
+function renderNav(page, lang) {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  
+  const links = navConfig[page] || navConfig.home;
+  const t = translations[lang];
+  
+  // Clear existing nav content except lang-switch
+  const langSwitch = nav.querySelector('.lang-switch');
+  nav.innerHTML = '';
+  
+  links.forEach(item => {
+    const a = document.createElement('a');
+    a.href = item.href;
+    a.setAttribute('data-i18n', item.key);
+    a.textContent = t[item.key] || item.key;
+    if (item.external) {
+      a.target = '_blank';
+      a.rel = 'noopener';
+    }
+    nav.appendChild(a);
+  });
+  
+  if (langSwitch) nav.appendChild(langSwitch);
+}
 
 function getSystemLanguage() {
   // System UI language (not browser UI language preference list order tricks)
@@ -215,16 +272,24 @@ function setLanguage(lang) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // On advertisers.html, default to Russian
   let lang = getInitialLanguage();
-  if (document.querySelector('.lang-switch')) {
-    // This is advertisers.html (has language switcher)
+  
+  // Detect page type
+  const isAdvertisers = document.querySelector('#hash-calc');
+  const page = isAdvertisers ? 'advertisers' : 'home';
+  
+  // On advertisers.html, default to Russian
+  if (isAdvertisers) {
     lang = 'ru';
   }
   
+  // Render navigation first (it contains i18n links)
+  renderNav(page, lang);
+  
+  // Then apply remaining translations
   setLanguage(lang);
 
-  // Handle language buttons (works on both index.html and advertisers.html)
+  // Handle language buttons
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       setLanguage(btn.getAttribute('data-lang'));
