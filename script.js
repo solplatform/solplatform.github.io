@@ -276,22 +276,28 @@ function setLanguage(lang) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  let lang = getInitialLanguage();
+  const lang = getInitialLanguage();
+  const page = document.querySelector('#hash-calc') ? 'advertisers' : 'home';
   
-  // Detect page type
-  const isAdvertisers = document.querySelector('#hash-calc');
-  const page = isAdvertisers ? 'advertisers' : 'home';
-  
-  // On advertisers.html, default to Russian
-  if (isAdvertisers) {
-    lang = 'ru';
-  }
-  
-  // Render navigation first (it contains i18n links)
-  renderNav(page, lang);
-  
-  // Then apply remaining translations
+  // Single entry point: setLanguage handles all translations + nav rendering
   setLanguage(lang);
+
+  // Hamburger menu toggle
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav');
+  if (menuToggle && nav) {
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      nav.classList.toggle('open');
+    });
+    // Close menu on nav link click (mobile)
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('open');
+      });
+    });
+  }
 
   // Handle language buttons
   document.querySelectorAll('.lang-btn').forEach(btn => {

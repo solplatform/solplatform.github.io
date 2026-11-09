@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="meta.title">Для рекламодателей — SolPlatform</title>
-  <meta name="description" content="Калькулятор хэшей промо-изображений, стратегия и статистика рекламной кампании" />
+  <title data-i18n="meta.title">SolPlatform — Open Source Apps</title>
+  <meta name="description" content="Download SolSIP and SolAgent — open-source Android apps" />
 
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,6 +20,11 @@
         <img src="assets/icon.png" alt="SolPlatform" class="logo-icon" />
         <span class="logo-text">SolPlatform</span>
       </div>
+      <button type="button" class="menu-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <nav class="nav">
         <div class="lang-switch">
           <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
@@ -195,6 +200,7 @@
     </div>
   </footer>
 
+  <script src="script.js"></script>
   <script>
     // Hash calculator
     document.getElementById('calc-hash-btn').addEventListener('click', async () => {
