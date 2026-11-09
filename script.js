@@ -269,6 +269,10 @@ function setLanguage(lang) {
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
   });
+
+  // 7. Re-render navigation with translated links
+  const page = document.querySelector('#hash-calc') ? 'advertisers' : 'home';
+  renderNav(page, lang);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
