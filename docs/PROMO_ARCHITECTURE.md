@@ -38,6 +38,7 @@
 
 **Endpoints:**
 - `GET /v1/admin/promo/request?country_code={ID}&region_code={ID}&city_id={ID}&postal_code={ZIP}&domain={DOMAIN}` — accumulate in memory
+- `GET /v1/admin/promo/dump` (auth) — view current in-memory accumulator
 - `POST /v1/admin/promo/flush` (auth) — manual flush trigger
 
 **Flush schedule:** 00:00 local server time ± random(0..30) min jitter. Background ticker каждые 5 минут.
@@ -256,6 +257,8 @@ go test ./internal/store/ -v -count=1 -timeout 60s
 - `TestPromoStats_FlushDaily_Idempotent` — повторный flush → no-op
 - `TestHandlePromoRequest/*` — HTTP endpoints (full/missing domain/empty params)
 - `TestHandlePromoFlush` — auth flush
+- `TestHandlePromoDump` — GET dump returns in-memory state
+- `TestPromoStats_Dump` — dump returns correct counts
 - `TestPromoStatsRow_JSON` — marshal/unmarshal DNS-пэйлоада
 - `TestSendPromoStats_Unconfigured` — unconfigured client → error
 
@@ -318,7 +321,7 @@ cd C:\xampp\htdocs\Projects\xmobile\android
 
 | Проект | Unit | Integration | Пропущено | Статус |
 |--------|------|-------------|-----------|--------|
-| xmobile-admin | 11 | — | 0 | ✅ Все PASS |
+| xmobile-admin | 13 | — | 0 | ✅ Все PASS |
 | xmobile-dns API | 12 | — | 0 | ✅ Все PASS |
 | xmobile-dns store | 3 | 5 | 0 | ✅ Все PASS (с MySQL) |
 | Android | — | — | — | ✅ BUILD SUCCESSFUL |
@@ -339,7 +342,12 @@ cd C:\xampp\htdocs\Projects\xmobile\android
 **Быстрый чек-лист:**
 
 ```powershell
-# 1. Отправить promo request (имитация Android):
+# 1. Посмотреть накопленное в памяти (без flush):
+curl -sk 'https://sip.xdexboard.com:8092/v1/admin/promo/dump' \
+  -H 'Authorization: Bearer <admin_token>'
+# Ожидаем: {"rows":[{"stat_date":"2026-11-15","domain":"sip.xdexboard.com","country_code":160,"region_code":499,"city_id":1234,"postal_code":"344900","request_count":3}],"total":1}
+
+# 2. Отправить promo request (имитация Android):
 curl -sk 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=160&region_code=499&city_id=1234&postal_code=344900&domain=sip.xdexboard.com'
 # Ожидаем: {"ok":true}
 
