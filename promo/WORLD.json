@@ -11,16 +11,14 @@
           "portrait_sha256": "REPLACE_WITH_SHA256",
           "landscape_img": "https://solplatform.github.io/assets/promo/world-light-landscape.webp",
           "landscape_sha256": "REPLACE_WITH_SHA256",
-          "alpha": 0.4,
-          "brightness": 0.0
+          "alpha": 0.25
         },
         "dark": {
           "portrait_img": "https://solplatform.github.io/assets/promo/world-dark-portrait.webp",
           "portrait_sha256": "REPLACE_WITH_SHA256",
           "landscape_img": "https://solplatform.github.io/assets/promo/world-dark-landscape.webp",
           "landscape_sha256": "REPLACE_WITH_SHA256",
-          "alpha": 0.2,
-          "brightness": -0.15
+          "alpha": 0.25
         }
       }
     }
