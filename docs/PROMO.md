@@ -10,21 +10,22 @@ https://solplatform.github.io/promo/
 
 По кодам геолокации (страна / регион / город) приложение делает запросы **по очереди**, пока не получит ответ 200:
 
-1. `/promo/{страна}/{регион}/{город}.json`
-2. `/promo/{страна}/{регион}.json`
-3. `/promo/{страна}.json`
-4. `/promo/WORLD.json`
+1. `/promo/{CC}/{RegionId}/{CityId}/{PostalCode}.json`
+2. `/promo/{CC}/{RegionId}/{CityId}.json`
+3. `/promo/{CC}/{RegionId}.json`
+4. `/promo/{CC}.json`
+5. `/promo/WORLD.json`
 
-Пример для Тольятти, Самарская область, Россия:
+Пример для Тольятти, Самарская область, Россия (RegionId=499, CityId=1234):
 
 ```
-https://solplatform.github.io/promo/RU/SAM/Tolyatti.json
-https://solplatform.github.io/promo/RU/SAM.json
+https://solplatform.github.io/promo/RU/499/1234.json
+https://solplatform.github.io/promo/RU/499.json
 https://solplatform.github.io/promo/RU.json
 https://solplatform.github.io/promo/WORLD.json
 ```
 
-Имена папок и файлов — **латиницей** (Tolyatti, SAM), чтобы URL были простыми.
+Имена папок — **числовые ID** из Sypex Geo (RegionId, CityId).
 
 ## Формат файла
 
@@ -34,8 +35,8 @@ https://solplatform.github.io/promo/WORLD.json
 {
   "level": "city",
   "country_code": "RU",
-  "region_code": "SAM",
-  "city": "Tolyatti",
+  "region_code": "499",
+  "city_id": "1234",
   "items": [
     {
       "id": "уникальный-id-слота",
@@ -76,6 +77,15 @@ https://solplatform.github.io/promo/WORLD.json
 | `alpha` | Прозрачность 0.0–1.0 |
 | `brightness` | Сдвиг яркости примерно −1.0…1.0 |
 
+### Поля уровня (корневой объект)
+
+| Поле | Смысл |
+|------|--------|
+| `level` | Уровень: `city`, `region`, `country`, `WORLD` |
+| `country_code` | ISO код страны (напр. "RU") |
+| `region_code` | Числовой ID региона Sypex Geo (напр. "499") |
+| `city_id` | Числовой ID города Sypex Geo (напр. "1234") |
+
 ### Что делает приложение
 
 1. Берёт первый успешный JSON по каскаду.
@@ -91,3 +101,17 @@ sha256sum assets/promo/banner.webp
 ```
 
 Полученную строку вписать в `portrait_sha256` или `landscape_sha256`.
+
+## Структура папок
+
+```
+promo/
+├── RU.json                    # Страновой уровень
+├── RU/
+│   ├── 499.json               # Регион (RegionId=499 — Самарская область)
+│   └── 499/
+│       └── 1234.json          # Город (CityId=1234 — Тольятти)
+└── WORLD.json                 # Глобальный fallback
+```
+
+Папки создаются по числовым ID из Sypex Geo. Для нового региона/города — создаётся папка с соответствующим ID.

@@ -1,8 +1,8 @@
 {
   "level": "city",
   "country_code": "RU",
-  "region_code": "SAM",
-  "city": "Tolyatti",
+  "region_code": "499",
+  "city_id": "1234",
   "items": [
     {
       "id": "tolyatti-partner-example",
