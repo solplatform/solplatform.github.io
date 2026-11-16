@@ -4,22 +4,30 @@
   "items": [
     {
       "id": "ru-clipmaster-memorial-bot-test",
-      "valid_until": "2026-12-31T23:59:59Z",
       "link_url": "https://t.me/ClipMaster24Bot",
+      "placement_from": "2026-01-01T00:00:00Z",
+      "placement_to": "2027-01-01T00:00:00Z",
+      "external_url": "https://t.me/ClipMaster24Bot",
+      "emoji_button_text": "🎞️",
+      "emoji_size_sp": 45,
+      "emoji_mirrored": false,
+      "emoji_horizontal_offset": 0,
       "themes": {
         "light": {
           "portrait_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-light-portrait.jpg",
           "portrait_sha256": "73e0509e4e2cd255ee5ed917c8c7548595755cf2e8566d6fcc16e2761db46b94",
           "landscape_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-light-landscape.jpg",
           "landscape_sha256": "b7c4027e0138c92494cf4d0cdf122e2d4e4ec3b9b9fcdaa7561eb206a91b99ee",
-          "alpha": 0.25
+          "alpha": 0.65,
+          "color": "#808080"
         },
         "dark": {
           "portrait_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-dark-portrait.jpg",
           "portrait_sha256": "ae8d2612787d0f69fa378273d853ea61a89cec69eabaeda11537c675eb41b5ce",
           "landscape_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-dark-landscape.jpg",
           "landscape_sha256": "9dda35e7c13a0da381f1ae268ac578594318b8285d74986a77eeebcb6626bb11",
-          "alpha": 0.25
+          "alpha": 0.75,
+          "color": "#C3302E"
         }
       }
     }
