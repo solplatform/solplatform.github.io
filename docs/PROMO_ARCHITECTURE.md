@@ -37,9 +37,18 @@
 | `docs/PROMO_ARCHITECTURE.md` | Копия общей документации |
 
 **Endpoints:**
-- `GET /v1/admin/promo/request?country_code={ID}&region_code={ID}&city_id={ID}&postal_code={ZIP}&domain={DOMAIN}` — accumulate in memory
+- `GET /v1/admin/promo/request?country_code={ISO}&region_code={ID}&city_id={ID}&postal_code={ZIP}&domain={DOMAIN}` — accumulate in memory
 - `GET /v1/admin/promo/dump` (auth) — view current in-memory accumulator
 - `POST /v1/admin/promo/flush` (auth) — manual flush trigger
+
+**Типы параметров:**
+| Параметр | Тип | Пример |
+|----------|-----|--------|
+| `country_code` | `string` (ISO 3166-1 alpha-2) | `"RU"` |
+| `region_code` | `uint32` (ID региона) | `499068` |
+| `city_id` | `uint32` (ID города) | `482283` |
+| `postal_code` | `string` | `"344900"` |
+| `domain` | `string` | `"sip.xdexboard.com"` |
 
 **Flush schedule:** 00:00 local server time ± random(0..30) min jitter. Background ticker каждые 5 минут.
 
@@ -84,7 +93,7 @@
 
 ```bash
 # На сервере:
-curl -sk 'https://127.0.0.1:8092/v1/admin/promo/request?country_code=160&region_code=499068&city_id=482283&postal_code=344900&domain=test.solsip.com'
+curl -sk 'https://127.0.0.1:8092/v1/admin/promo/request?country_code=RU&region_code=499068&city_id=482283&postal_code=344900&domain=test.solsip.com'
 
 # Ожидаемый ответ:
 # {"ok":true}
@@ -108,7 +117,7 @@ journalctl -u xmobile-admin.service --since "5 min ago" | grep promo-stats
 curl -s -X POST 'https://dns.xdexboard.com/v1/admin/promo-stats' \
   -H 'X-Admin-Token: xmobile-xdexboard-lab-change-me' \
   -H 'Content-Type: application/json' \
-  -d '{"rows":[{"stat_date":"2026-11-15","domain":"test.solsip.com","country_code":160,"region_code":499068,"city_id":482283,"postal_code":"344900","request_count":5}]}'
+  -d '{"rows":[{"stat_date":"2026-11-15","domain":"test.solsip.com","country_code":"RU","region_code":499068,"city_id":482283,"postal_code":"344900","request_count":5}]}'
 
 # Ожидаемый ответ:
 # {"ok":true}
@@ -130,10 +139,10 @@ sudo mysql -e 'DESCRIBE xmobile_dns.promo_stats;'
 # id              bigint unsigned  NO  PRI  NULL  auto_increment
 # stat_date       date             NO  MUL  NULL
 # domain          varchar(253)     NO       NULL
-# country_code    int unsigned     NO       0
+# country_code    varchar(10)      NO       ''
 # region_code     int unsigned     NO       0
 # city_id         int unsigned     NO       0
-# postal_code     varchar(20)      NO
+# postal_code     varchar(20)      NO       ''
 # request_count   int unsigned     NO       0
 
 sudo mysql -e 'SELECT * FROM xmobile_dns.promo_stats;'
@@ -190,7 +199,7 @@ sudo nginx -t
 
 ```bash
 # 1. Android отправляет promo request (через приложение или curl):
-curl -sk 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=160&region_code=499068&city_id=482283&postal_code=344900&domain=test.solsip.com'
+curl -sk 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=RU&region_code=499068&city_id=482283&postal_code=344900&domain=test.solsip.com'
 
 # 2. Flush (ручной или автоматический через 5 мин):
 curl -sk -X POST 'https://sip.xdexboard.com:8092/v1/admin/promo/flush' \
@@ -345,17 +354,17 @@ cd C:\xampp\htdocs\Projects\xmobile\android
 # 1. Посмотреть накопленное в памяти (без flush):
 curl -sk 'https://sip.xdexboard.com:8092/v1/admin/promo/dump' \
   -H 'Authorization: Bearer <admin_token>'
-# Ожидаем: {"rows":[{"stat_date":"2026-11-15","domain":"sip.xdexboard.com","country_code":160,"region_code":499,"city_id":1234,"postal_code":"344900","request_count":3}],"total":1}
+# Ожидаем: {"rows":[{"stat_date":"2026-11-15","domain":"sip.xdexboard.com","country_code":"RU","region_code":499,"city_id":1234,"postal_code":"344900","request_count":3}],"total":1}
 
 # 2. Отправить promo request (имитация Android):
-curl -sk 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=160&region_code=499&city_id=1234&postal_code=344900&domain=sip.xdexboard.com'
+curl -sk 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=RU&region_code=499068&city_id=482283&postal_code=344900&domain=sip.xdexboard.com'
 # Ожидаем: {"ok":true}
 
 # 2. Отправить ещё один запрос с тем же ключом (проверка accumulation):
-curl -sk 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=160&region_code=499&city_id=1234&postal_code=344900&domain=sip.xdexboard.com'
+curl -sk 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=RU&region_code=499068&city_id=482283&postal_code=344900&domain=sip.xdexboard.com'
 
 # 3. Отправить запрос с другим ключом:
-curl -sk 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=160&region_code=500&city_id=5678&domain=sip.xdexboard.com'
+curl -sk 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=RU&region_code=500&city_id=5678&domain=sip.xdexboard.com'
 
 # 4. Вызвать manual flush (не ждём 00:00):
 curl -sk -X POST 'https://sip.xdexboard.com:8092/v1/admin/promo/flush' \
@@ -371,8 +380,8 @@ ssh server@xdexboard.com "sudo mysql -e 'SELECT * FROM xmobile_dns.promo_stats O
 +----+------------+----------------+---------------+-------------+--------+-------------+---------------+
 | id | stat_date  | domain         | country_code  | region_code | city_id| postal_code | request_count |
 +----+------------+----------------+---------------+-------------+--------+-------------+---------------+
-|  1 | 2026-11-14 | sip.xdexboard.com|          160 |         499 |   1234 | 344900      |             2 |
-|  2 | 2026-11-14 | sip.xdexboard.com|          160 |         500 |   5678 |             |             1 |
+|  1 | 2026-11-14 | sip.xdexboard.com|          RU |         499 |   1234 | 344900      |             2 |
+|  2 | 2026-11-14 | sip.xdexboard.com|          RU |         500 |   5678 |             |             1 |
 +----+------------+----------------+---------------+-------------+--------+-------------+---------------+
 ```
 
@@ -384,15 +393,15 @@ ssh server@xdexboard.com "sudo mysql -e 'SELECT * FROM xmobile_dns.promo_stats O
 
 ```powershell
 # Запрос с чужим доменом → 403 Forbidden:
-curl -sk -w "\nHTTP %{http_code}\n" 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=160&region_code=499&city_id=1234&postal_code=344900&domain=example.com'
+curl -sk -w "\nHTTP %{http_code}\n" 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=RU&region_code=499&city_id=1234&postal_code=344900&domain=example.com'
 # Ожидаем: HTTP 403
 
 # Запрос без domain → 400 Bad Request:
-curl -sk -w "\nHTTP %{http_code}\n" 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=160&region_code=499&city_id=1234&postal_code=344900'
+curl -sk -w "\nHTTP %{http_code}\n" 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=RU&region_code=499&city_id=1234&postal_code=344900'
 # Ожидаем: HTTP 400
 
 # Запрос с пустым domain → 400 Bad Request:
-curl -sk -w "\nHTTP %{http_code}\n" 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=160&domain='
+curl -sk -w "\nHTTP %{http_code}\n" 'https://sip.xdexboard.com:8092/v1/admin/promo/request?country_code=RU&domain='
 # Ожидаем: HTTP 400
 ```
 
