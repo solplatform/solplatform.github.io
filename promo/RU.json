@@ -13,17 +13,17 @@
       "emoji_horizontal_offset": 0,
       "themes": {
         "light": {
-          "portrait_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-light-portrait.jpg",
+          "portrait_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-light-landscape.jpg",
           "portrait_sha256": "6d12f9efcf4e2c1d4ba1a13895a62f4198cbbaea02650f770948ca2becc3f682",
-          "landscape_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-light-landscape.jpg",
+          "landscape_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-light-portrait.jpg",
           "landscape_sha256": "24cd841246e420e0931ce85522ea3c14d7dac0c452667b3100dcc5be1b8aa73e",
           "alpha": 0.65,
           "color": "#808080"
         },
         "dark": {
-          "portrait_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-dark-portrait.jpg",
+          "portrait_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-dark-landscape.jpg",
           "portrait_sha256": "08e7cc1bd1f04b57ac4ac3e0e7929422633ff734ceff31a16075bddc2132b0a0",
-          "landscape_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-dark-landscape.jpg",
+          "landscape_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-dark-portrait.jpg",
           "landscape_sha256": "b879f70cac2dca989da9691b445cdd5e0370bf1274e7ec00e66a827614d65928",
           "alpha": 0.75,
           "color": "#3C302E"
