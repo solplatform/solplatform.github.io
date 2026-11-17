@@ -3,28 +3,28 @@
   "country_code": "RU",
   "items": [
     {
-      "id": "ru-neogold-ozon",
+      "id": "ru-clipmaster-memorial-bot-test",
       "placement_from": "2026-01-01T00:00:00Z",
-      "placement_to": "2027-01-01T00:00:00Z",
-      "external_url": "https://www.ozon.ru/product/neo-gold-universalnoe-sredstvo-ot-metok-i-gryazi-3802889238/?__rr=1&abt_att=1&from=share_ios&perehod=smm_share_button_productpage_link&sh=ghMXWovbjQ&short=jQXp3qG",
-      "emoji_button_text": "🧴",
+      "placement_to": "2029-01-01T00:00:00Z",
+      "external_url": "https://t.me/ClipMaster24Bot",
+      "emoji_button_text": "🎞️",
       "emoji_size_sp": 45,
       "emoji_mirrored": false,
       "emoji_horizontal_offset": 0,
       "themes": {
         "light": {
-          "portrait_img": "https://solplatform.github.io/assets/promo/neogold/ru-neogold-light-portrait.jpg",
-          "portrait_sha256": "6e093463c0e485e7513b0b87cf53769e2668bbf072bfa089b119bd86b379ec5b",
-          "landscape_img": "https://solplatform.github.io/assets/promo/neogold/ru-neogold-light-landscape.jpg",
-          "landscape_sha256": "bf620a91c38815908cd34fe622fe651a68ed956893bfcd45e4b681cdc4a6c399",
+          "portrait_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-light-portrait.jpg",
+          "portrait_sha256": "6d12f9efcf4e2c1d4ba1a13895a62f4198cbbaea02650f770948ca2becc3f682",
+          "landscape_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-light-landscape.jpg",
+          "landscape_sha256": "24cd841246e420e0931ce85522ea3c14d7dac0c452667b3100dcc5be1b8aa73e",
           "alpha": 0.65,
           "color": "#808080"
         },
         "dark": {
-          "portrait_img": "https://solplatform.github.io/assets/promo/neogold/ru-neogold-dark-portrait.jpg",
-          "portrait_sha256": "322c3bc6b6b514df5aa2d18780c7b5db3536593331eef1f912b734554599c993",
-          "landscape_img": "https://solplatform.github.io/assets/promo/neogold/ru-neogold-dark-landscape.jpg",
-          "landscape_sha256": "387b5d6ef73163bd22474708ffd20928c799ef95e51b2d130540e34b22580765",
+          "portrait_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-dark-portrait.jpg",
+          "portrait_sha256": "08e7cc1bd1f04b57ac4ac3e0e7929422633ff734ceff31a16075bddc2132b0a0",
+          "landscape_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-dark-landscape.jpg",
+          "landscape_sha256": "b879f70cac2dca989da9691b445cdd5e0370bf1274e7ec00e66a827614d65928",
           "alpha": 0.75,
           "color": "#3C302E"
         }
