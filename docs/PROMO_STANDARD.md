@@ -28,7 +28,6 @@ promo/
   "items": [
     {
       "id": "уникальный-id-слота",
-      "link_url": "https://сайт-партнёра",
       "placement_from": "2026-01-01T00:00:00Z",
       "placement_to": "2027-01-01T00:00:00Z",
       "external_url": "https://внешний-сайт",
@@ -77,7 +76,6 @@ promo/
 | Поле | Тип | Описание |
 |------|-----|----------|
 | `id` | string | Уникальный id рекламной записи |
-| `link_url` | string | Куда вести по кнопке «Перейти» внутри приложения |
 | `placement_from` | string | Дата начала показа (UTC, ISO 8601, напр. `2026-01-01T00:00:00Z`). Пустая строка = без ограничения |
 | `placement_to` | string | Дата окончания показа (UTC, ISO 8601). Пустая строка = без ограничения |
 | `external_url` | string | Внешний URL для рекламного баннера (открывается в браузере) |
@@ -126,7 +124,6 @@ promo/
   "items": [
     {
       "id": "world-default-donate",
-      "link_url": "https://solplatform.github.io/#donate",
       "placement_from": "",
       "placement_to": "",
       "external_url": "https://solplatform.github.io/#donate",

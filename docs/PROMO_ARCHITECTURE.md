@@ -21,7 +21,7 @@
   "country_code": "RU",
   "region_code": "SAM",
   "city": "Tolyatti",
-  "items": [ { "id": "...", "valid_until": "...", "link_url": "...", "themes": { "light": {...}, "dark": {...} } } ]
+  "items": [ { "id": "...", "placement_from": "...", "placement_to": "...", "external_url": "...", "themes": { "light": {...}, "dark": {...} } } ]
 }
 ```
 

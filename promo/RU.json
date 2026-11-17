@@ -4,7 +4,6 @@
   "items": [
     {
       "id": "ru-clipmaster-memorial-bot-test",
-      "link_url": "https://t.me/ClipMaster24Bot",
       "placement_from": "2026-01-01T00:00:00Z",
       "placement_to": "2029-01-01T00:00:00Z",
       "external_url": "https://t.me/ClipMaster24Bot",
@@ -32,11 +31,10 @@
       }
     },
     {
-      "id": "ru-clipmaster-memorial-bot-test",
-      "link_url": "https://t.me/ClipMaster24Bot",
+      "id": "ru-clipmaster-memorial-bot-max",
       "placement_from": "2026-01-01T00:00:00Z",
       "placement_to": "2029-01-01T00:00:00Z",
-      "external_url": "https://t.me/ClipMaster24Bot",
+      "external_url": "https://max.ru/se15048277_bot?startapp",
       "emoji_button_text": "🎞️",
       "emoji_size_sp": 45,
       "emoji_mirrored": false,
@@ -44,17 +42,17 @@
       "themes": {
         "light": {
           "portrait_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-light-portrait-max.jpg",
-          "portrait_sha256": "73e0509e4e2cd255ee5ed917c8c7548595755cf2e8566d6fcc16e2761db46b94",
+          "portrait_sha256": "b6228efbd9a92624994eb27098b4c9ebac04dab3347e70fcb58498dacf986279",
           "landscape_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-light-landscape-max.jpg",
-          "landscape_sha256": "b7c4027e0138c92494cf4d0cdf122e2d4e4ec3b9b9fcdaa7561eb206a91b99ee",
+          "landscape_sha256": "512e8d3b3b84381c3cf2f16a1dc10b2f463c2d232df2a0cb95e4b6c2da89c12e",
           "alpha": 0.65,
           "color": "#808080"
         },
         "dark": {
           "portrait_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-dark-portrait-max.jpg",
-          "portrait_sha256": "ae8d2612787d0f69fa378273d853ea61a89cec69eabaeda11537c675eb41b5ce",
+          "portrait_sha256": "28e9ac839541c60dd6843700f50d5da1ec5216d52f9d57fee2924923442329df",
           "landscape_img": "https://solplatform.github.io/assets/promo/clipmaster/ru-dark-landscape-max.jpg",
-          "landscape_sha256": "9dda35e7c13a0da381f1ae268ac578594318b8285d74986a77eeebcb6626bb11",
+          "landscape_sha256": "f154ca6a1c94edbeffc1cd97d2c7e91757e9efc44198a3b38927d126d6eee1c9",
           "alpha": 0.75,
           "color": "#3C302E"
         }
