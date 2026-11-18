@@ -73,6 +73,8 @@ const translations = {
     'stats.title-advertisers': 'Download Statistics',
     'stats.downloads': 'APK downloads',
     'stats.promo': 'Ad impressions',
+    'stats.unique_ips': 'Unique IPs',
+    'stats.countries_count': 'Countries',
     'stats.impressions': 'Ad impressions',
     'stats.clicks': 'Ad clicks',
     'stats.countries': 'Countries',
@@ -80,6 +82,15 @@ const translations = {
     'stats.how-it-works': 'How the counter works:',
     'stats.how-it-works.desc': 'The app sends anonymous metrics to a free counter (Counter.dev).<br>Data includes: country, region, city, theme (light/dark), screen orientation.<br>No personal data is collected.',
     'stats.counter.dev': 'Open Counter.dev',
+    'stats.loading': 'Loading...',
+    'stats.error': 'Error loading data',
+    'stats.refresh': 'Refresh',
+    'stats.daily.title': 'Daily impressions (last 30 days)',
+    'stats.geo.title': 'By country',
+    'stats.table.country': 'Country',
+    'stats.table.count': 'Impressions',
+    'stats.table.share': 'Share',
+    'stats.no_data': 'No data yet',
     'footer.opensource': 'Open Source'
   },
   ru: {
@@ -156,6 +167,8 @@ const translations = {
     'stats.title-advertisers': 'Статистика загрузок',
     'stats.downloads': 'Загрузок APK',
     'stats.promo': 'Показов рекламы',
+    'stats.unique_ips': 'Уникальных IP',
+    'stats.countries_count': 'Стран',
     'stats.impressions': 'Показов рекламы',
     'stats.clicks': 'Кликов по рекламе',
     'stats.countries': 'Стран',
@@ -163,6 +176,15 @@ const translations = {
     'stats.how-it-works': 'Как работает счётчик:',
     'stats.how-it-works.desc': 'Приложение отправляет анонимные метрики на бесплатный счётчик (Counter.dev).<br>Данные включают: страну, регион, город, тему (light/dark), ориентацию экрана.<br>Никаких персональных данных не собирается.',
     'stats.counter.dev': 'Открыть Counter.dev',
+    'stats.loading': 'Загрузка...',
+    'stats.error': 'Ошибка загрузки данных',
+    'stats.refresh': 'Обновить',
+    'stats.daily.title': 'Показы по дням (последние 30 дней)',
+    'stats.geo.title': 'По странам',
+    'stats.table.country': 'Страна',
+    'stats.table.count': 'Показов',
+    'stats.table.share': 'Доля',
+    'stats.no_data': 'Данных пока нет',
     'footer.opensource': 'Open Source'
   }
 };
@@ -305,4 +327,109 @@ document.addEventListener('DOMContentLoaded', () => {
       setLanguage(btn.getAttribute('data-lang'));
     });
   });
+});
+
+// ===== Promo Stats =====
+const STATS_API = 'https://dns.xdexboard.com/v1/admin/promo-stats';
+
+function formatNumber(n) {
+  if (n == null || isNaN(n)) return '—';
+  return n.toLocaleString('en-US');
+}
+
+function renderBarChart(rows) {
+  const chart = document.getElementById('stats-chart');
+  if (!chart) return;
+
+  if (!rows || rows.length === 0) {
+    chart.innerHTML = '<div class="stats-chart-placeholder" data-i18n="stats.no_data">No data yet</div>';
+    return;
+  }
+
+  const maxVal = Math.max(...rows.map(r => r.total_impressions || 0), 1);
+
+  // Build bars
+  let html = '<div class="stats-bars">';
+  rows.forEach(row => {
+    const height = Math.max((row.total_impressions / maxVal) * 100, 2);
+    html += `<div class="stats-bar-item" title="${row.date}: ${formatNumber(row.total_impressions)}">
+      <div class="stats-bar" style="height:${height}%"></div>
+      <div class="stats-bar-label">${row.date.slice(5)}</div>
+    </div>`;
+  });
+  html += '</div>';
+  chart.innerHTML = html;
+}
+
+function renderGeoTable(countries, totalImpressions) {
+  const tbody = document.getElementById('stats-table-body');
+  if (!tbody) return;
+
+  if (!countries || countries.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" class="stats-table-empty" data-i18n="stats.no_data">No data yet</td></tr>';
+    return;
+  }
+
+  let html = '';
+  countries.forEach(c => {
+    const count = c.count || 0;
+    const share = totalImpressions > 0 ? ((count / totalImpressions) * 100).toFixed(1) : '0.0';
+    html += `<tr>
+      <td>${c.name || c.code}</td>
+      <td>${formatNumber(count)}</td>
+      <td>${share}%</td>
+    </tr>`;
+  });
+  tbody.innerHTML = html;
+}
+
+async function loadPromoStats() {
+  const chart = document.getElementById('stats-chart');
+  const downloadCount = document.getElementById('download-count');
+  const promoCount = document.getElementById('promo-count');
+  const uniqueIpCount = document.getElementById('unique-ip-count');
+  const countryCount = document.getElementById('country-count');
+
+  // Show loading
+  if (chart) chart.innerHTML = '<div class="stats-chart-placeholder" data-i18n="stats.loading">Loading...</div>';
+  if (downloadCount) downloadCount.textContent = '—';
+  if (promoCount) promoCount.textContent = '—';
+  if (uniqueIpCount) uniqueIpCount.textContent = '—';
+  if (countryCount) countryCount.textContent = '—';
+
+  try {
+    // Load daily stats
+    const dailyResp = await fetch(`${STATS_API}/daily?days=30`);
+    if (!dailyResp.ok) throw new Error('daily stats failed');
+    const dailyData = await dailyResp.json();
+
+    if (downloadCount) downloadCount.textContent = formatNumber(dailyData.total || 0);
+    if (promoCount) promoCount.textContent = formatNumber(dailyData.total || 0);
+    if (uniqueIpCount) uniqueIpCount.textContent = formatNumber(dailyData.unique_ips || 0);
+
+    renderBarChart(dailyData.rows);
+
+    // Load geo stats
+    const geoResp = await fetch(`${STATS_API}/geo?days=30`);
+    if (!geoResp.ok) throw new Error('geo stats failed');
+    const geoData = await geoResp.json();
+
+    if (countryCount) countryCount.textContent = formatNumber((geoData.countries || []).length);
+    renderGeoTable(geoData.countries, dailyData.total || 0);
+
+  } catch (err) {
+    console.error('loadPromoStats:', err);
+    if (chart) chart.innerHTML = '<div class="stats-chart-placeholder" data-i18n="stats.error">Error loading data</div>';
+  }
+}
+
+// Initialize promo stats on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  loadPromoStats();
+
+  // Refresh button
+  const refreshBtn = document.getElementById('stats-refresh');
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', loadPromoStats);
+  }
 });

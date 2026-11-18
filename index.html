@@ -168,7 +168,45 @@
             <div class="stat-value" id="promo-count">—</div>
             <div class="stat-label" data-i18n="stats.promo">Ad impressions</div>
           </div>
+          <div class="stat-card">
+            <div class="stat-value" id="unique-ip-count">—</div>
+            <div class="stat-label" data-i18n="stats.unique_ips">Unique IPs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="country-count">—</div>
+            <div class="stat-label" data-i18n="stats.countries_count">Countries</div>
+          </div>
         </div>
+
+        <!-- Daily chart -->
+        <div class="stats-detail" id="stats-detail">
+          <div class="stats-detail-header">
+            <h3 class="stats-detail-title" data-i18n="stats.daily.title">Daily impressions (last 30 days)</h3>
+            <button type="button" class="btn btn-sm btn-ghost" id="stats-refresh" data-i18n="stats.refresh">Refresh</button>
+          </div>
+          <div class="stats-chart" id="stats-chart">
+            <div class="stats-chart-placeholder" data-i18n="stats.loading">Loading...</div>
+          </div>
+        </div>
+
+        <!-- Geo table -->
+        <div class="stats-detail" id="stats-geo">
+          <h3 class="stats-detail-title" data-i18n="stats.geo.title">By country</h3>
+          <div class="stats-table-wrap" id="stats-table-wrap">
+            <table class="stats-table" id="stats-table">
+              <thead>
+                <tr>
+                  <th data-i18n="stats.table.country">Country</th>
+                  <th data-i18n="stats.table.count">Impressions</th>
+                  <th data-i18n="stats.table.share">Share</th>
+                </tr>
+              </thead>
+              <tbody id="stats-table-body">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <!--
           Moderator: generate image hashes for promo.json
           Linux:  sha256sum assets/promo/your-image.webp
