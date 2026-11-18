@@ -75,6 +75,7 @@ const translations = {
     'stats.promo': 'Ad impressions',
     'stats.unique_ips': 'Unique IPs',
     'stats.countries_count': 'Countries',
+    'stats.clicks': 'Clicks',
     'stats.impressions': 'Ad impressions',
     'stats.clicks': 'Ad clicks',
     'stats.countries': 'Countries',
@@ -175,6 +176,7 @@ const translations = {
     'stats.promo': 'Показов рекламы',
     'stats.unique_ips': 'Уникальных IP',
     'stats.countries_count': 'Стран',
+    'stats.clicks': 'Кликов',
     'stats.impressions': 'Показов рекламы',
     'stats.clicks': 'Кликов по рекламе',
     'stats.countries': 'Стран',
@@ -443,6 +445,7 @@ async function loadPromoStats() {
   const promoCount = document.getElementById('promo-count');
   const uniqueIpCount = document.getElementById('unique-ip-count');
   const countryCount = document.getElementById('country-count');
+  const clickCount = document.getElementById('click-count');
 
   // Show loading
   if (chart) chart.innerHTML = '<div class="stats-chart-placeholder" data-i18n="stats.loading">Loading...</div>';
@@ -450,6 +453,7 @@ async function loadPromoStats() {
   if (promoCount) promoCount.textContent = '—';
   if (uniqueIpCount) uniqueIpCount.textContent = '—';
   if (countryCount) countryCount.textContent = '—';
+  if (clickCount) clickCount.textContent = '—';
 
   try {
     // Load daily stats
@@ -472,6 +476,12 @@ async function loadPromoStats() {
     renderGeoTable(geoData.countries, dailyData.total || 0);
     renderRegionsTable(geoData.regions, dailyData.total || 0);
     renderCitiesTable(geoData.cities, dailyData.total || 0);
+
+    // Load click stats
+    const clickResp = await fetch(`${STATS_API}/clicks?days=7`);
+    if (!clickResp.ok) throw new Error('clicks stats failed');
+    const clickData = await clickResp.json();
+    if (clickCount) clickCount.textContent = formatNumber(clickData.total_clicks || 0);
 
   } catch (err) {
     console.error('loadPromoStats:', err);
