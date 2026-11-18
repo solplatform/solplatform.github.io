@@ -85,9 +85,15 @@ const translations = {
     'stats.loading': 'Loading...',
     'stats.error': 'Error loading data',
     'stats.refresh': 'Refresh',
-    'stats.daily.title': 'Daily impressions (last 30 days)',
+    'stats.daily.title': 'Daily impressions (last 7 days)',
     'stats.geo.title': 'By country',
+    'stats.regions.title': 'By region',
+    'stats.cities.title': 'By city',
+    'stats.regions': 'Regions',
+    'stats.cities': 'Cities',
     'stats.table.country': 'Country',
+    'stats.table.region': 'Region',
+    'stats.table.city': 'City',
     'stats.table.count': 'Impressions',
     'stats.table.share': 'Share',
     'stats.no_data': 'No data yet',
@@ -179,8 +185,12 @@ const translations = {
     'stats.loading': 'Загрузка...',
     'stats.error': 'Ошибка загрузки данных',
     'stats.refresh': 'Обновить',
-    'stats.daily.title': 'Показы по дням (последние 30 дней)',
+    'stats.daily.title': 'Показы по дням (последние 7 дней)',
     'stats.geo.title': 'По странам',
+    'stats.regions.title': 'По регионам',
+    'stats.cities.title': 'По городам',
+    'stats.table.region': 'Регион',
+    'stats.table.city': 'Город',
     'stats.table.country': 'Страна',
     'stats.table.count': 'Показов',
     'stats.table.share': 'Доля',
@@ -383,6 +393,50 @@ function renderGeoTable(countries, totalImpressions) {
   tbody.innerHTML = html;
 }
 
+function renderRegionsTable(regions, totalImpressions) {
+  const tbody = document.getElementById('stats-regions-body');
+  if (!tbody) return;
+
+  if (!regions || regions.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" class="stats-table-empty" data-i18n="stats.no_data">No data yet</td></tr>';
+    return;
+  }
+
+  let html = '';
+  regions.forEach(r => {
+    const count = r.count || 0;
+    const share = totalImpressions > 0 ? ((count / totalImpressions) * 100).toFixed(1) : '0.0';
+    html += `<tr>
+      <td>${r.name || r.code}</td>
+      <td>${formatNumber(count)}</td>
+      <td>${share}%</td>
+    </tr>`;
+  });
+  tbody.innerHTML = html;
+}
+
+function renderCitiesTable(cities, totalImpressions) {
+  const tbody = document.getElementById('stats-cities-body');
+  if (!tbody) return;
+
+  if (!cities || cities.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" class="stats-table-empty" data-i18n="stats.no_data">No data yet</td></tr>';
+    return;
+  }
+
+  let html = '';
+  cities.forEach(c => {
+    const count = c.count || 0;
+    const share = totalImpressions > 0 ? ((count / totalImpressions) * 100).toFixed(1) : '0.0';
+    html += `<tr>
+      <td>${c.name || c.id}</td>
+      <td>${formatNumber(count)}</td>
+      <td>${share}%</td>
+    </tr>`;
+  });
+  tbody.innerHTML = html;
+}
+
 async function loadPromoStats() {
   const chart = document.getElementById('stats-chart');
   const downloadCount = document.getElementById('download-count');
@@ -399,7 +453,7 @@ async function loadPromoStats() {
 
   try {
     // Load daily stats
-    const dailyResp = await fetch(`${STATS_API}/daily?days=30`);
+    const dailyResp = await fetch(`${STATS_API}/daily?days=7`);
     if (!dailyResp.ok) throw new Error('daily stats failed');
     const dailyData = await dailyResp.json();
 
@@ -410,12 +464,14 @@ async function loadPromoStats() {
     renderBarChart(dailyData.rows);
 
     // Load geo stats
-    const geoResp = await fetch(`${STATS_API}/geo?days=30`);
+    const geoResp = await fetch(`${STATS_API}/geo?days=7`);
     if (!geoResp.ok) throw new Error('geo stats failed');
     const geoData = await geoResp.json();
 
     if (countryCount) countryCount.textContent = formatNumber((geoData.countries || []).length);
     renderGeoTable(geoData.countries, dailyData.total || 0);
+    renderRegionsTable(geoData.regions, dailyData.total || 0);
+    renderCitiesTable(geoData.cities, dailyData.total || 0);
 
   } catch (err) {
     console.error('loadPromoStats:', err);
